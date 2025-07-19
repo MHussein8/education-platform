@@ -1,0 +1,162 @@
+/* تنسيقات خاصة بصفحة الطالب */
+.student-container {
+    max-width: 100%;
+    padding: 0;
+}
+
+.student-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.student-info h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.student-code {
+    background-color: rgba(255,255,255,0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.student-main {
+    padding: 20px;
+}
+
+.courses-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.course-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border-right: 4px solid var(--primary);
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.course-title {
+    color: var(--primary);
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--light);
+    display: flex;
+    align-items: center;
+}
+
+.course-title i {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.course-progress {
+    background: var(--light);
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.content-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-item:last-child {
+    border-bottom: none;
+}
+
+.content-badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.lecture { background: #e3f2fd; color: #1976d2; }
+.assignment { background: #e8f5e9; color: #388e3c; }
+.exam { background: #ffebee; color: #d32f2f; }
+
+.content-type {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.grade {
+    background-color: var(--secondary);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.status-icon {
+    font-size: 16px;
+}
+
+.assignment-details {
+    display: block; /* يجب أن يكون غير hidden */
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* تعديلات للشاشات الكبيرة */
+@media (min-width: 768px) {
+    .student-header {
+        text-align: right;
+        padding: 25px 40px;
+    }
+    
+    .student-info h1 {
+        font-size: 28px;
+    }
+    
+    .student-code {
+        margin-top: 0;
+    }
+    
+    .courses-container {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+    
+    .course-card {
+        padding: 20px;
+    }
+}
+@media (max-width: 480px) {
+    .student-header {
+        padding: 15px;
+    }
+    .course-title {
+        font-size: 16px;
+    }
+}

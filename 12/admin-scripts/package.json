@@ -1,0 +1,16 @@
+{
+  "name": "admin-scripts",
+  "version": "1.0.0",
+  "main": "upload-data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "upload-data": "node upload-data.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "firebase-admin": "^13.4.0"
+  }
+}

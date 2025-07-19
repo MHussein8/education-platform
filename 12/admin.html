@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الإدارة - إنشاء واجب جديد</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/student.css">
+    <link rel="stylesheet" href="css/login-styles.css">
+    <style>
+        /* إضافة بعض التنسيقات الأولية لهذه الصفحة فقط */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .admin-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: calc(100% - 20px); /* Adjusting for padding */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .question-item {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .question-item input, .question-item textarea {
+            margin-bottom: 10px;
+        }
+        .add-question-btn, .remove-question-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .remove-question-btn {
+            background-color: #dc3545;
+            position: absolute;
+            top: 10px;
+            left: 10px; /* لكي يكون الزر في الزاوية اليسرى في تصميم RTL */
+            margin-top: 0;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .submit-btn:hover, .add-question-btn:hover, .remove-question-btn:hover {
+            opacity: 0.9;
+        }
+        /* لتنسيق خيارات الإجابات المتعددة */
+        .option-group {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .option-group input[type="radio"] {
+            margin-left: 10px; /* مسافة بين الراديو والنص */
+            width: auto;
+        }
+        .option-group input[type="text"] {
+            flex-grow: 1;
+            margin-left: 5px; /* مسافة بين النص وحقل الإدخال */
+        }
+        .option-group button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .option-group button.correct-answer {
+            background-color: #28a745; /* لون مختلف لزر "الإجابة الصحيحة" */
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>إنشاء واجب / اختبار جديد</h1>
+        <form id="assignmentForm">
+            <div class="form-group">
+                <label for="assignmentTitle">عنوان الواجب / الاختبار:</label>
+                <input type="text" id="assignmentTitle" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contentType">النوع:</label>
+                <select id="contentType" required>
+                    <option value="">-- اختر النوع --</option>
+                    <option value="assignment">واجب</option>
+                    <option value="exam">اختبار</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="courseSelect">اختر الكورس:</label>
+                <select id="courseSelect" required>
+                    <option value="">-- اختر كورسًا --</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label for="publishDate">تاريخ النشر:</label>
+                <input type="date" id="publishDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dueDate">تاريخ التسليم:</label>
+                <input type="date" id="dueDate">
+            </div>
+
+            <div class="form-group">
+                <label for="description">تعليمات / وصف الواجب:</label>
+                <textarea id="description"></textarea>
+            </div>
+
+            <h2>الأسئلة:</h2>
+<div id="questionsContainer"></div>
+
+<script type="text/template" id="questionTemplate">
+  <div class="question-item">
+    <button class="remove-question-btn">حذف السؤال</button>
+    <div class="form-group">
+      <label>نص السؤال:</label>
+      <textarea class="question-text" required></textarea>
+    </div>
+    <div class="form-group">
+      <label>درجة السؤال:</label>
+      <input type="number" class="question-points" min="1" value="10" required>
+    </div>
+    <!-- باقي حقول السؤال -->
+  </div>
+</script>
+            <button type="button" class="add-question-btn" id="addQuestionBtn">إضافة سؤال جديد</button>
+
+            <button type="submit" class="submit-btn">إنشاء الواجب</button>
+        </form>
+    </div>
+
+    <script src="js/firebase-init.js"></script>
+    <script src="js/admin.js"></script>
+<script>
+	// <![CDATA[
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>

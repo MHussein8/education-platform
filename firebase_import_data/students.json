@@ -1,0 +1,65 @@
+{
+  "1002": { 
+    "name": "محمد علي",
+    "courses": {
+      "python_basics": { 
+        "title": "مقدمة في البرمجة باستخدام بايثون",
+        "description": "ابدأ رحلتك في عالم البرمجة مع لغة بايثون القوية.",
+        "image": "images/image1.jpg",
+        "color": "#4CAF50",
+        "progress": 75,
+        "totalLessons": 10,
+        "currentLesson": "الوحدة ٨ - الدرس: التعامل مع الملفات",
+        "pendingAssignments": 1,
+        "pendingTests": 1,
+        "overallGrade": 88,
+        "lectures": [
+          { "name": "المحاضرة الأولى: مفاهيم أساسية", "link": "#", "icon": "fa-play-circle" },
+          { "name": "المحاضرة الثانية: المتغيرات وأنواع البيانات", "link": "#", "icon": "fa-play-circle" }
+        ],
+        "assignments": [
+          { "name": "واجب الوحدة الأولى", "status": "pending", "link": "#", "icon": "fa-hourglass-half" }
+        ],
+        "grades": [
+          { "name": "اختبار الوحدة الأولى", "grade": "85", "icon": "fa-medal" }
+        ]
+      },
+      "web_dev_intro": { 
+        "title": "تطوير الويب للمبتدئين",
+        "description": "تعلم أساسيات HTML و CSS و JavaScript.",
+        "image": "images/image2.jpg",
+        "color": "#FFC107",
+        "progress": 50,
+        "totalLessons": 8,
+        "currentLesson": "الوحدة ٤ - الدرس: تنسيق CSS",
+        "pendingAssignments": 0,
+        "pendingTests": 1,
+        "overallGrade": 70,
+        "lectures": [],
+        "assignments": [],
+        "grades": []
+      }
+    }
+  },
+  "1003": { 
+    "name": "ليلى أحمد",
+    "courses": {
+      "data_science_r": { 
+        "title": "علم البيانات باستخدام R",
+        "description": "مقدمة لعلم البيانات وتحليلها.",
+        "image": "images/image3.jpg",
+        "color": "#2196F3",
+        "progress": 30,
+        "totalLessons": 7,
+        "currentLesson": "الوحدة ٢ - الدرس: الإحصاء الوصفي",
+        "pendingAssignments": 1,
+        "pendingTests": 0,
+        "overallGrade": 65,
+        "lectures": [],
+        "assignments": [],
+        "grades": []
+      }
+    }
+  }
+ 
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعليم | الدخول</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/login-styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <h1>منصة التعليم</h1>
+        </div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="studentCode"><i class="fas fa-user-graduate"></i> كود الطالب</label>
+                <input type="text" id="studentCode" placeholder="أدخل الكود المكون من 8 أرقام" required>
+            </div>
+            
+            <button type="submit" class="btn">
+                <i class="fas fa-sign-in-alt"></i> الدخول
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const code = document.getElementById('studentCode').value;
+            if(code.length === 4) {
+                window.location.href = `student.html?code=${code}`;
+            } else {
+                alert("الكود يجب أن يكون 8 أرقام");
+            }
+        });
+    </script>
+</body>
+</html>

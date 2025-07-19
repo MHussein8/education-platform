@@ -1,0 +1,156 @@
+:root {
+    --primary-blue: #007bff; /* لون أزرق أساسي */
+    --dark-blue: #0056b3;   /* أزرق أغمق للـ hover */
+    --light-bg: #e9ecef;    /* لون خلفية فاتح */
+    --card-bg: #ffffff;     /* لون خلفية الكارت الأبيض */
+    --text-color: #343a40;  /* لون النص الداكن */
+    --border-color: #ced4da; /* لون حدود المدخلات */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* لون الظل */
+}
+
+body.login-page {
+    font-family: 'Cairo', sans-serif; /* استخدام خط القاهرة */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #00c6ff 100%); /* خلفية زرقاء متدرجة */
+    color: var(--text-color);
+    direction: rtl; /* اتجاه النص من اليمين لليسار */
+}
+
+.login-container {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 0.8s ease-out; /* إضافة أنيميشن ظهور */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo i {
+    font-size: 4em;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+    animation: bounceIn 1s ease-out; /* أنيميشن للـ icon */
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.logo h1 {
+    font-family: 'Poppins', sans-serif; /* استخدام خط Poppins */
+    font-size: 2.5em;
+    color: var(--text-color);
+    margin: 0;
+    font-weight: 700;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    text-align: right; /* محاذاة النص لليمين */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1em;
+}
+
+.input-group label i {
+    margin-left: 8px; /* مسافة بين الأيقونة والنص */
+    color: var(--primary-blue);
+}
+
+.input-group input[type="text"] {
+    width: calc(100% - 20px); /* عرض مناسب مع الـ padding */
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input[type="text"]::placeholder {
+    color: #888;
+}
+
+.input-group input[type="text"]:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25); /* ظل أزرق عند التركيز */
+    outline: none;
+}
+
+.btn {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* مسافة بين النص والأيقونة */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: var(--dark-blue);
+    transform: translateY(-2px);
+}
+
+.btn i {
+    font-size: 1.3em;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .login-container {
+        margin: 20px;
+        padding: 30px;
+    }
+
+    .logo h1 {
+        font-size: 2em;
+    }
+
+    .logo i {
+        font-size: 3.5em;
+    }
+
+    .input-group input[type="text"] {
+        font-size: 1em;
+    }
+
+    .btn {
+        font-size: 1.1em;
+    }
+}

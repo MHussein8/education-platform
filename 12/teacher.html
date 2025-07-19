@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة تحكم المعلم</title>
+    <link rel="stylesheet" href="css/teacher.css">
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js"></script>
+    <script src="js/firebase-init.js"></script> <!-- نفس ملف تهيئة مشروعك الحالي -->
+</head>
+<body>
+    <div class="container">
+        <h1>إنشاء واجب / اختبار جديد</h1>
+
+        <form id="assignmentForm">
+            <label>اختر الكورس:</label>
+            <select id="courseSelect">
+                <option value="">اختر كورس</option>
+            </select>
+
+            <label>اسم الواجب/الاختبار:</label>
+            <input type="text" id="assignmentName" required>
+
+            <label>النوع:</label>
+            <select id="assignmentType">
+                <option value="assignment">واجب</option>
+                <option value="exam">اختبار</option>
+            </select>
+
+            <div id="questionsContainer">
+                <h3>الأسئلة:</h3>
+                <button type="button" id="addQuestionBtn">إضافة سؤال</button>
+            </div>
+
+            <button type="submit">حفظ</button>
+        </form>
+    </div>
+
+    <script src="js/teacher.js"></script>
+</body>
+</html>
